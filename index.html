@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" id="html" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <style>
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            /* Lebar sidebar */
+            height: 100%;
+            background-color: rgb(6 78 59);
+            z-index: 1000;
+            overflow-x: hidden;
+            transition: transform 0.5s;
+            transform: translateX(100%);
+        }
+
+        .sidebar.show {
+            display: block;
+            transform: translateX(0%);
+        }
+
+        body.sidebar-active {
+            overflow: hidden;
+        }
+
+        body.sidebar-active .overlay {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80%;
+                /* Atur lebar sidebar untuk perangkat dengan lebar maksimum 1024px */
+            }
+        }
+
+        @keyframes title {
+            from {
+                background: rgb(16, 185, 129);
+                background: linear-gradient(90deg, rgba(16, 185, 129, 1) 0%, rgba(59, 130, 246, 1) 100%);
+            }
+
+            to {
+                background: rgb(16, 185, 129);
+                background: linear-gradient(270deg, rgba(16, 185, 129, 1) 0%, rgba(59, 130, 246, 1) 100%);
+            }
+        }
+    </style>
+</head>
+
+<body class="select-none bg-white dark:bg-gray-950">
+    <div class="">
+        <nav class="bg-emerald-500 text-white p-4 flex justify-between items-center fixed w-full top-0">
+            <h1 class="text-2xl font-semibold">Dashboard</h1>
+            <div class="flex items-center gap-x-2">
+                <button id="sidebarCollapse">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M18 17h-14c-.553 0-1-.447-1-1s.447-1 1-1h14c.553 0 1 .447 1 1s-.447 1-1 1zm0-5h-14c-.553 0-1-.447-1-1s.447-1 1-1h14c.553 0 1 .447 1 1s-.447 1-1 1zm0-5h-14c-.553 0-1-.447-1-1s.447-1 1-1h14c.553 0 1 .447 1 1s-.447 1-1 1z" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    
+        <div class="overlay" id="overlay"></div>
+        <div class="sidebar" id="sidebar">
+            <button id="sidebarClose" class="text-white absolute top-5 right-4">
+                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+                </svg>
+            </button>
+            <h1 class="text-2xl font-semibold text-white p-4">Menu</h1>
+            <ul class="text-white p-4">
+                <li class="my-2"><a href="https://www.instagram.com/akbar_illust/" class="hover:text-gray-300">Instagram</a></li>
+                <li class="my-2"><a href="https://akbar-illust.github.io/Doodles-Persona/" class="hover:text-gray-300">MBTI</a></li>
+            </ul>
+            <div class="fixed bottom-4 left-12 md:left-20">
+                <p class="text-xs text-gray-400">copyright © 2024 akbar-illust</p>
+            </div>
+        </div>
+    
+        <div class="mt-24">
+            <div class="grid justify-center text-center">
+                <div class="grid justify-center text-center">
+                    <img class="border-2 border-black rounded-full" src="img/Tak berjudul32_20240321105552.png"
+                        width="150rem" alt="">
+                </div>
+                <div class="text-3xl font-semibold">
+                    <!-- <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-500">Akbar Illust
+                    </h1> -->
+                    <h1 class="text-white">akbar_illust</h1>
+                </div>
+    
+                <div class="grid justify-center mt-3 gap-y-2">
+                    <a target="_blank" class="text-white flex justify-between bg-emerald-600 hover:bg-emerald-500 shadow-xl p-3 w-36 rounded-full transition hover:scale-110" href="https://www.instagram.com/akbar_illust/">Instagram
+                        <img class="ms-1" src="icons/white color/Instagram-Logo-2--Streamline-Logos (1).svg" alt="">
+                    </a>
+                    <a target="_blank" class="text-white flex justify-between bg-emerald-600 hover:bg-emerald-500 shadow-xl p-3 w-36 rounded-full transition hover:scale-110" href="https://akbar-illust.github.io/Doodles-Persona/">MBTI
+                        <img class="ms-1" src="icons/white color/Book-Close-Bookmark-1--Streamline-Ultimate (1).svg" alt="">
+                    </a>
+                    <!-- <a class="text-white flex justify-between bg-emerald-600 hover:bg-emerald-500 shadow-xl p-3 w-36 rounded-full transition hover:scale-110" href="">Facebook
+                        <img class="ms-1" src="icons/white color/Facebook-Logo-1--Streamline-Logos (1).svg" alt="">
+                    </a>
+                    <a class="text-white flex justify-between bg-emerald-600 hover:bg-emerald-500 shadow-xl p-3 w-36 rounded-full transition hover:scale-110" href="">Twitter
+                        <img class="ms-1" src="icons/white color/Twitter-Logo-1--Streamline-Logos (1).svg" alt="">
+                    </a> -->
+                </div>
+            </div>
+        </div>    
+    </div>
+    <script src="cdn tailwind css 3.4.1.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
